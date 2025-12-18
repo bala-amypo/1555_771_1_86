@@ -12,7 +12,6 @@ public class Farm {
     @Column(unique = true)
     private long id;
 
-    @ManyToOne
     private User owner;
 
     private String name;
