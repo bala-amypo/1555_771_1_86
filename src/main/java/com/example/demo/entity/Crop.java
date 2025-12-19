@@ -15,6 +15,7 @@ import jakarta.persistence.Entity;
 // import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+@Entity
 @Table(name = "crops")
 public class Crop {
     @Id
