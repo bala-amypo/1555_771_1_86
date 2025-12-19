@@ -16,7 +16,7 @@ public class FarmServiceImpl implements FarmService{
 
     public FarmServiceImpl(FarmRepository farmRepository)
     {
-        this.farmRepository=farmR
+        this.farmRepository=farmRepository;
     }
     @Override
     public Farm createFarm(Farm farm){
