@@ -13,7 +13,9 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
 
+@Entity
 @Table(name = "suggestions")
 public class Suggestion {
     @Id
