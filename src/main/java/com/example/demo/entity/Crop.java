@@ -1,16 +1,55 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+// import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+@Table(name = "crops")
 public class Crop {
-    @Column(unique = true)
-    private long id;
-    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @NotNull
+    @DecimalMin("2.0") @DecimalMax("10.0")
     private Double suitablePHMin;
+
+    @NotNull
+    @DecimalMin("2.0") @DecimalMax("10.0")
     private Double suitablePHMax;
+
+    @NotNull
+    @Size(max = 1000 ,min = 0)
     private Double requiredWater;
+
+    @NotBlank
+    // @Pattern(regexp = "^(Kharif|Rabi|Summer)$", message = "Season must be Kharif, Rabi, or Summer")
     private String season;
+
+    @PrePersist
+    @PreUpdate
+    private void validateCrop() {
+        if (suitablePHMin > suitablePHMax) {
+            throw new RuntimeException("PH min must be less than or equal to PH max");
+        }
+        if (!java.util.List.of("Kharif", "Rabi", "Summer").contains(season)) {
+            throw new RuntimeException("Invalid season");
+        }
+    }
     public Crop() {
     }
     public Crop(long id, String name, Double suitablePHMin, Double suitablePHMax, Double requiredWater, String season) {
