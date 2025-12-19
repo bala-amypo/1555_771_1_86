@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User register(User user){
-        if(userRepository.existsByEmail(user.getEmail())){
-            throw new RuntimeException("Email already exists") ;
-        }
-        if (user.getRole() == null) {
-            user.setRole("USER");
-        }
+        // if(userRepository.existsByEmail(user.getEmail())){
+        //     throw new RuntimeException("Email already exists") ;
+        // }
+        // if (user.getRole() == null) {
+        //     user.setRole("USER");
+        // }
         return userRepository.save(user);
     }
 
