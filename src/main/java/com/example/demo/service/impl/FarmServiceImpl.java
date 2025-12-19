@@ -11,9 +11,13 @@ import com.example.demo.service.FarmService;
 
 @Service
 public class FarmServiceImpl implements FarmService{
-    @Autowired
-    private FarmRepository farmRepository;
+    
+    private final FarmRepository farmRepository;
 
+    public FarmServiceImpl(FarmRepository farmRepository)
+    {
+        this.farmRepository=farmR
+    }
     @Override
     public Farm createFarm(Farm farm){
         return  farmRepository.save(farm);
