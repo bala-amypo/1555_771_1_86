@@ -3,7 +3,7 @@ package com.example.crop_fertilizer.service.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.example.crop_fertilizer.entity.User;
 import com.example.crop_fertilizer.exception.ResourceNotFoundException;
 import com.example.crop_fertilizer.exception.BadRequestException;
@@ -11,6 +11,7 @@ import com.example.crop_fertilizer.repository.UserRepository;
 import com.example.crop_fertilizer.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
