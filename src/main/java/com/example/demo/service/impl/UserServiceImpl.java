@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.crop_fertilizer.entity.User;
 import com.example.crop_fertilizer.exception.ResourceNotFoundException;
-import com.example.crop_fertilizer.exception.Bad
+import com.example.crop_fertilizer.exception.BadRequestException;
 import com.example.crop_fertilizer.repository.UserRepository;
 import com.example.crop_fertilizer.service.UserService;
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.findByEmail(user.getEmail())
                 .ifPresent(u -> {
-                    throw new IllegalArgumentException("Email already exists");
+                    throw new BadRequestException("Email already exists");
                 });
 
         return userRepository.save(user);
