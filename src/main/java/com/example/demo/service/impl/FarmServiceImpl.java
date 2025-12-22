@@ -24,6 +24,9 @@ public class FarmServiceImpl implements FarmService {
         if (farm.getUser() == null ) {
             throw new IllegalArgumentException("User is required for farm");
         }
+        if( farm.getSoilPH()>10.0 || farm.getSoilPH()<3.0){
+            throw new IllegalArgumentException("pH is invalid");
+        }
 
         return farmRepository.save(farm);
     }
