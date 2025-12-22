@@ -55,10 +55,11 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public List<Farm> getFarmsByOwner(Long ownerId) {
-        // Returns empty list automatically if no farms exist
         return farmRepository.findByOwnerId(ownerId);
     }
 }
+
+
 
 // package com.example.crop_fertilizer.service.impl;
 
