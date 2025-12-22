@@ -39,7 +39,7 @@ public class User {
     @NotBlank
     private String role;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Farm> farms;
 
 
@@ -47,10 +47,7 @@ public class User {
     }
 
 
-    public User(Long id, @NotBlank @Size(max = 100) String name, @Email @NotBlank String email,
-            @NotBlank @Size(min = 6) String password,
-            @NotBlank @Pattern(regexp = "^(USER|ADMIN)$", message = "Role must be either 'USER' or 'ADMIN'") String role,
-            List<Farm> farms) {
+    public User(Long id,String name,String email,String password,String role,List<Farm> farms) {
         this.id = id;
         this.name = name;
         this.email = email;

@@ -12,7 +12,6 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Entity;
-// import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -39,7 +38,6 @@ public class Crop {
     private Double requiredWater;
 
     @NotBlank
-    // @Pattern(regexp = "^(Kharif|Rabi|Summer)$", message = "Season must be Kharif, Rabi, or Summer")
     private String season;
 
     @PrePersist
