@@ -45,17 +45,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElseThrow(()->new BadRequestException("User not found with id: "+id));
     }
 
-    @Override
-    public User login(String email, String password) {
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-        if (!user.getPassword().equals(password)) {
-            throw new IllegalArgumentException("Invalid password");
-        }
-
-        return user;
     }
 
 }
