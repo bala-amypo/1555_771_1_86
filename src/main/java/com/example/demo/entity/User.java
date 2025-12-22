@@ -40,6 +40,7 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Farm> farms;
 
 
