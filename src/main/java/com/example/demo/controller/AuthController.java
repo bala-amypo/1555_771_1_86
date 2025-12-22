@@ -1,3 +1,57 @@
+package com.example.demo.controller;
+
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@RestController
+@RequestMapping("/auth")
+@Tag(name = "Authentication")
+public class AuthController {
+
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> postRegister(@RequestBody User user) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(userService.register(user));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
+        User user = userService.findByEmail(request.getEmail());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 .body("Invalid credentials");
+        }
+
+        if (!request.getPassword().equals(user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 .body("Invalid credentials");
+        }
+
+        return ResponseEntity.ok(
+            Map.of(
+                "name", user.getName(),
+                "role", user.getRole()
+            )
+        );
+    }
+}
 
 
 
