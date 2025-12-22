@@ -70,6 +70,6 @@ public class SuggestionServiceImpl implements SuggestionService {
 
     @Override
     public List<Suggestion> getSuggestionsByFarm(Long farmId) {
-        return suggestionRepository.findByFarmIdOrderByCreatedAtDesc(farmId);
+        return suggestionRepository.findByFarmId(farmId);
     }
 }
