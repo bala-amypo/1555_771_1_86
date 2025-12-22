@@ -46,17 +46,19 @@ public class SuggestionServiceImpl implements SuggestionService {
                 .map(Crop::getName)
                 .toList();
 
-        List<Fertilizer> fertilizers =
-                catalogService.findFertilizersForCrops(cropNames);
+        List<Fertilizer> fertilizers = catalogService.findFertilizersForCrops(cropNames);
 
-    Suggestion suggestion = new Suggestion();
-    suggestion.setFarm(farm);
-    suggestion.setSuggestedCrops(String.join(",", cropNames));
-    suggestion.setSuggestedFertilizers(
-            fertilizers.stream()
-                       .map(Fertilizer::getName)
-                       .collect(Collectors.joining(","))
-    );
+        // Create Suggestion using plain Java (no builder)
+        Suggestion suggestion = new Suggestion();
+        suggestion.setFarm(farm);
+        suggestion.setSuggestedCrops(String.join(",", cropNames));
+        suggestion.setSuggestedFertilizers(
+                fertilizers.stream()
+                           .map(Fertilizer::getName)
+                           .collect(Collectors.joining(","))
+        );
+
+        return suggestionRepository.save(suggestion);
     }
 
     @Override
