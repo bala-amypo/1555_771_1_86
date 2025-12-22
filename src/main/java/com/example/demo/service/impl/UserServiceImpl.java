@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
                 .ifPresent(u -> {
                     throw new BadRequestException("Email already exists");
                 });
-
         return userRepository.save(user);
     }
 
