@@ -1,14 +1,14 @@
-package com.example.crop_fertilizer.service.impl;
+package com.example.demo.service.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.crop_fertilizer.entity.User;
-import com.example.crop_fertilizer.exception.ResourceNotFoundException;
-import com.example.crop_fertilizer.exception.BadRequestException;
-import com.example.crop_fertilizer.repository.UserRepository;
-import com.example.crop_fertilizer.service.UserService;
+import com.example.demo.entity.User;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
 
 @Service
 @Transactional
