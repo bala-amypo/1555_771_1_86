@@ -6,7 +6,7 @@ import com.example.demo.exception.BadRequestException;
 import com.example.demo.repository.CropRepository;
 import com.example.demo.repository.FertilizerRepository;
 import com.example.demo.service.CatalogService;
-import com.example.demo.util.ValidationUtil;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +35,6 @@ public class CatalogServiceImpl implements CatalogService {
             throw new BadRequestException("PH min cannot be greater than max");
         }
 
-        if (!ValidationUtil.validSeason(crop.getSeason())) {
-            throw new BadRequestException("Invalid season");
-        }
 
         return cropRepository.save(crop);
     }
@@ -66,7 +63,6 @@ public class CatalogServiceImpl implements CatalogService {
                     fertilizerRepository.findByRecommendedForCropsContaining(crop)
             );
         }
-
         return new ArrayList<>(result);
     }
 }
