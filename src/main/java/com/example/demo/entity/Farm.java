@@ -13,7 +13,6 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-// import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -41,7 +40,6 @@ public class Farm {
     private Double waterLevel;
 
     @NotBlank
-    // @Pattern(regexp = "^(Kharif|Rabi|Summer)$", message = "Season must be Kharif, Rabi, or Summer")
     private String season;
 
     @PrePersist

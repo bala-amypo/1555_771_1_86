@@ -28,11 +28,9 @@ public class Suggestion {
 
     
     @Size(max = 1000, message = "Crop list must not exceed 1000 characters")
-    @Pattern(regexp = "^([^,]+)(,[^,]+)*$", message = "Must be a comma-separated list")
     private String suggestedCrops;
 
     @Size(max = 1000, message = "Fertilizer list must not exceed 1000 characters")
-    @Pattern(regexp = "^([^,]+)(,[^,]+)*$", message = "Must be a comma-separated list")
     private String suggestedFertilizers;
 
     @Column(nullable = false, updatable = false)
