@@ -30,7 +30,7 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public Farm createFarm(Farm farm, Long ownerId) {
 
-        if (farm.geSoiltPh() < 3.0 || farm.getPh() > 10.0) {
+        if (farm.getSoilPH() < 3.0 || farm.getSoilPH() > 10.0) {
             throw new IllegalArgumentException("pH value must be between 3.0 and 10.0");
         }
 

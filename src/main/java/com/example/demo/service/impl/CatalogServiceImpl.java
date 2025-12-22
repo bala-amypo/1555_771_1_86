@@ -60,7 +60,7 @@ public class CatalogServiceImpl implements CatalogService {
 
         for (String crop : cropNames) {
             result.addAll(
-                    fertilizerRepository.findByRecommendedForCropsContaining(crop)
+                    fertilizerRepository.findFertilizersByRecommendedCrops(crop)
             );
         }
         return new ArrayList<>(result);
