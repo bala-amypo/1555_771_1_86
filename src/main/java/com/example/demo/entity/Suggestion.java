@@ -15,6 +15,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "suggestions")
 public class Suggestion {
@@ -24,6 +26,7 @@ public class Suggestion {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="farm_id", nullable=false)
+    @JsonIgnore
     private Farm farm;
 
     

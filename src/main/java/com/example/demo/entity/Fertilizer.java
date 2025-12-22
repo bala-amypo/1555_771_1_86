@@ -10,6 +10,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Entity;
 
+
+
 @Entity
 @Table(name = "fertilizers")
 public class Fertilizer {
