@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Farm;
-import com.example.demo.model.User;
+import com.example.demo.entity.Farm;
+import com.example.demo.entity.User;
 import com.example.demo.repository.FarmRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.FarmService;
