@@ -48,7 +48,6 @@ public class SuggestionServiceImpl implements SuggestionService {
 
         List<Fertilizer> fertilizers = catalogService.findFertilizersForCrops(cropNames);
 
-        // Create Suggestion using plain Java (no builder)
         Suggestion suggestion = new Suggestion();
         suggestion.setFarm(farm);
         suggestion.setSuggestedCrops(String.join(",", cropNames));
