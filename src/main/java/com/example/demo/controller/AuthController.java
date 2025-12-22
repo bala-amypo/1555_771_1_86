@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.LoginRequest;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
@@ -30,16 +29,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(
+            @RequestHeader("email") String email,
+            @RequestHeader("password") String password) {
 
-        User user = userService.findByEmail(request.getEmail());
+        User user = userService.findByEmail(email);
 
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                 .body("Invalid credentials");
-        }
-
-        if (!request.getPassword().equals(user.getPassword())) {
+        if (user == null || !password.equals(user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                                  .body("Invalid credentials");
         }
@@ -52,8 +48,6 @@ public class AuthController {
         );
     }
 }
-
-
 
 
 // package com.example.demo.controller;
