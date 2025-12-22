@@ -35,23 +35,21 @@ public class CatalogController {
             @RequestHeader("password") String password) {
 
         User user = userService.findByEmail(email);
-
         if (user == null) {
             throw new BadRequestException("User not found");
         }
 
         if (!password.equals(user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                 .body("Invalid credentials");
+                    .body("Invalid credentials");
         }
 
         if (!"ADMIN".equals(user.getRole())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                 .body("Access denied");
+                    .body("Access denied");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(catalogService.addCrop(crop));
+        return ResponseEntity.ok(catalogService.addCrop(crop));
     }
 
     @PostMapping("/fertilizer")
@@ -61,23 +59,21 @@ public class CatalogController {
             @RequestHeader("password") String password) {
 
         User user = userService.findByEmail(email);
-
         if (user == null) {
             throw new BadRequestException("User not found");
         }
 
         if (!password.equals(user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                 .body("Invalid credentials");
+                    .body("Invalid credentials");
         }
 
         if (!"ADMIN".equals(user.getRole())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                 .body("Access denied");
+                    .body("Access denied");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(catalogService.addFertilizer(fertilizer));
+        return ResponseEntity.ok(catalogService.addFertilizer(fertilizer));
     }
 
     @GetMapping("/crops/suitable")
