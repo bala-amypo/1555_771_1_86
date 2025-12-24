@@ -1,15 +1,15 @@
-package com.example.demo.repository;
+// package com.example.demo.repository;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.Farm;
+// import com.example.demo.entity.Farm;
 
-public interface FarmRepository extends JpaRepository<Farm,Long> {
+// public interface FarmRepository extends JpaRepository<Farm,Long> {
 
-    List<Farm> findByOwnerId(Long ownerId);
+//     List<Farm> findByOwnerId(Long ownerId);
 
-    Optional<Farm> findByIdAndOwnerId(Long farmId,Long ownerId);
-}
+//     Optional<Farm> findByIdAndOwnerId(Long farmId,Long ownerId);
+// }

@@ -1,12 +1,12 @@
-package com.example.demo.service;
+// package com.example.demo.service;
 
-import java.util.List;
+// import java.util.List;
 
-import com.example.demo.entity.Suggestion;
+// import com.example.demo.entity.Suggestion;
 
-public interface SuggestionService {
+// public interface SuggestionService {
     
-    Suggestion generateSuggestion(Long farmId);
-    Suggestion getSuggestion(Long suggestionId);
-    List<Suggestion> getSuggestionsByFarm(Long farmId);
-}
+//     Suggestion generateSuggestion(Long farmId);
+//     Suggestion getSuggestion(Long suggestionId);
+//     List<Suggestion> getSuggestionsByFarm(Long farmId);
+// }
