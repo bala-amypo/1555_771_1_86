@@ -1,123 +1,123 @@
-package com.example.demo.entity;
+// package com.example.demo.entity;
 
-import java.util.List;
+// import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+// import jakarta.persistence.CascadeType;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.OneToMany;
+// import jakarta.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+// import jakarta.validation.constraints.Email;
+// import jakarta.validation.constraints.NotBlank;
+// import jakarta.validation.constraints.Pattern;
+// import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+// @Entity
+// @Table(name = "users")
+// public class User {
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
     
-    @NotBlank
-    @Size(max = 100)
-    private String name;
+//     @NotBlank
+//     @Size(max = 100)
+//     private String name;
 
-    @Email
-    @NotBlank
-    @Column(unique = true)
-    private String email;
+//     @Email
+//     @NotBlank
+//     @Column(unique = true)
+//     private String email;
 
-    @NotBlank
-    @Size(min=6)
-    private String password;
+//     @NotBlank
+//     @Size(min=6)
+//     private String password;
     
-    @NotBlank
-    private String role;
+//     @NotBlank
+//     private String role;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Farm> farms;
-
-
-    public User() {
-    }
+//     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+//     @JsonIgnore
+//     private List<Farm> farms;
 
 
-    public User(Long id,String name,String email,String password,String role,List<Farm> farms) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.farms = farms;
-    }
+//     public User() {
+//     }
 
 
-    public Long getId() {
-        return id;
-    }
+//     public User(Long id,String name,String email,String password,String role,List<Farm> farms) {
+//         this.id = id;
+//         this.name = name;
+//         this.email = email;
+//         this.password = password;
+//         this.role = role;
+//         this.farms = farms;
+//     }
 
 
-    public String getName() {
-        return name;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
 
-    public String getEmail() {
-        return email;
-    }
+//     public String getName() {
+//         return name;
+//     }
 
 
-    public String getPassword() {
-        return password;
-    }
+//     public String getEmail() {
+//         return email;
+//     }
 
 
-    public String getRole() {
-        return role;
-    }
+//     public String getPassword() {
+//         return password;
+//     }
 
 
-    public List<Farm> getFarms() {
-        return farms;
-    }
+//     public String getRole() {
+//         return role;
+//     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//     public List<Farm> getFarms() {
+//         return farms;
+//     }
 
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
 
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//     public void setName(String name) {
+//         this.name = name;
+//     }
 
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//     public void setEmail(String email) {
+//         this.email = email;
+//     }
 
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+//     public void setPassword(String password) {
+//         this.password = password;
+//     }
 
 
-    public void setFarms(List<Farm> farms) {
-        this.farms = farms;
-    }
+//     public void setRole(String role) {
+//         this.role = role;
+//     }
+
+
+//     public void setFarms(List<Farm> farms) {
+//         this.farms = farms;
+//     }
 
     
-}
+// }
