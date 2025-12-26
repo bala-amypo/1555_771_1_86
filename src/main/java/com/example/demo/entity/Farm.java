@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+
 
 @Entity
 @Table(name = "farms")
