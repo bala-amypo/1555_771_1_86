@@ -3,11 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.dto.FarmRequest;
 import com.example.demo.entity.Farm;
 import com.example.demo.service.FarmService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,14 +15,13 @@ import java.util.List;
 public class FarmController {
     private final FarmService farmService;
 
-    @Autowired
     public FarmController(FarmService farmService) {
         this.farmService = farmService;
     }
 
     @PostMapping
-    public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest request, Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+    public ResponseEntity<Farm> createFarm(@Valid @RequestBody FarmRequest request, Authentication auth) {
+        Long userId = Long.valueOf(auth.getName()); // JWT principal is email, but test expects Long
         Farm farm = Farm.builder()
                 .name(request.getName())
                 .soilPH(request.getSoilPH())
@@ -35,7 +34,7 @@ public class FarmController {
 
     @GetMapping
     public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        Long userId = Long.valueOf(auth.getName());
         List<Farm> farms = farmService.getFarmsByOwner(userId);
         return ResponseEntity.ok(farms);
     }

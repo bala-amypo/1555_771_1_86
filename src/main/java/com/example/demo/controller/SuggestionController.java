@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Suggestion;
 import com.example.demo.service.SuggestionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.List;
 public class SuggestionController {
     private final SuggestionService suggestionService;
 
-    @Autowired
     public SuggestionController(SuggestionService suggestionService) {
         this.suggestionService = suggestionService;
     }

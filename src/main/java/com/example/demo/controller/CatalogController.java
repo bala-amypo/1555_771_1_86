@@ -4,12 +4,12 @@ import com.example.demo.dto.*;
 import com.example.demo.entity.Crop;
 import com.example.demo.entity.Fertilizer;
 import com.example.demo.service.CatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,13 +17,12 @@ import java.util.List;
 public class CatalogController {
     private final CatalogService catalogService;
 
-    @Autowired
     public CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;
     }
 
     @PostMapping("/crop")
-    public ResponseEntity<Crop> addCrop(@RequestBody CropRequest request, Authentication auth) {
+    public ResponseEntity<Crop> addCrop(@Valid @RequestBody CropRequest request, Authentication auth) {
         if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             return ResponseEntity.status(403).build();
         }
@@ -39,7 +38,7 @@ public class CatalogController {
     }
 
     @PostMapping("/fertilizer")
-    public ResponseEntity<Fertilizer> addFertilizer(@RequestBody FertilizerRequest request, Authentication auth) {
+    public ResponseEntity<Fertilizer> addFertilizer(@Valid @RequestBody FertilizerRequest request, Authentication auth) {
         if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             return ResponseEntity.status(403).build();
         }
@@ -53,7 +52,10 @@ public class CatalogController {
     }
 
     @GetMapping("/crops/suitable")
-    public ResponseEntity<List<Crop>> findCrops(@RequestParam Double ph, @RequestParam Double water, @RequestParam String season) {
+    public ResponseEntity<List<Crop>> findCrops(
+            @RequestParam Double ph, 
+            @RequestParam Double water, 
+            @RequestParam String season) {
         List<Crop> crops = catalogService.findSuitableCrops(ph, water, season);
         return ResponseEntity.ok(crops);
     }
