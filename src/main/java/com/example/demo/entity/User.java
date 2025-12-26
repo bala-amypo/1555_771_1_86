@@ -31,8 +31,10 @@ public class User {
     @NotBlank
     private String password;
 
-    @NotBlank
-    private String role = "USER";
+    @Builder.Default
+@NotBlank
+private String role = "USER";
+
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Farm> farms;

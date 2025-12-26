@@ -51,8 +51,10 @@ public class SuggestionServiceImpl implements SuggestionService {
                 .orElseThrow(() -> new ResourceNotFoundException("Suggestion not found"));
     }
 
+
     @Override
-    public List<Suggestion> getSuggestionsByFarm(Long farmId) {
-        return suggestionRepository.findByFarmIdOrderByCreatedAtDesc(farmId);
-    }
+public List<Suggestion> getSuggestionsByFarm(Long farmId) {
+    return suggestionRepository.findByFarmId(farmId);
+}
+
 }
