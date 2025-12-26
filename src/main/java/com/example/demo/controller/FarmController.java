@@ -2,9 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.FarmRequest;
 import com.example.demo.entity.Farm;
-import com.example.demo.security.UserPrincipal;
 import com.example.demo.service.FarmService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -13,39 +12,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/farms")
-@Tag(name = "Farms")
 public class FarmController {
-    
     private final FarmService farmService;
-    
+
+    @Autowired
     public FarmController(FarmService farmService) {
         this.farmService = farmService;
     }
-    
+
     @PostMapping
-    public ResponseEntity<?> createFarm(@RequestBody FarmRequest request, Authentication auth) {
-        UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
-        
+    public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest request, Authentication auth) {
+        Long userId = (Long) auth.getPrincipal();
         Farm farm = Farm.builder()
                 .name(request.getName())
                 .soilPH(request.getSoilPH())
                 .waterLevel(request.getWaterLevel())
                 .season(request.getSeason())
                 .build();
-        
-        Farm savedFarm = farmService.createFarm(farm, principal.getUserId());
-        return ResponseEntity.ok(savedFarm);
+        Farm saved = farmService.createFarm(farm, userId);
+        return ResponseEntity.ok(saved);
     }
-    
+
     @GetMapping
-    public ResponseEntity<?> listFarms(Authentication auth) {
-        UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
-        List<Farm> farms = farmService.getFarmsByOwner(principal.getUserId());
+    public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
+        Long userId = (Long) auth.getPrincipal();
+        List<Farm> farms = farmService.getFarmsByOwner(userId);
         return ResponseEntity.ok(farms);
     }
-    
+
     @GetMapping("/{farmId}")
-    public ResponseEntity<?> getFarm(@PathVariable Long farmId) {
+    public ResponseEntity<Farm> getFarmById(@PathVariable Long farmId) {
         Farm farm = farmService.getFarmById(farmId);
         return ResponseEntity.ok(farm);
     }

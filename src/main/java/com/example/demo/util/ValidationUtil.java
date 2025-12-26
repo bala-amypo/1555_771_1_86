@@ -1,12 +1,10 @@
 package com.example.demo.util;
 
-import java.util.Set;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidationUtil {
-    
-    private static final Set<String> VALID_SEASONS = Set.of("Kharif", "Rabi", "Summer");
-    
     public static boolean validSeason(String season) {
-        return season != null && VALID_SEASONS.contains(season);
+        return season != null && (season.equals("Kharif") || season.equals("Rabi") || season.equals("Summer"));
     }
 }
