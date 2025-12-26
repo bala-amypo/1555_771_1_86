@@ -16,5 +16,6 @@ public class OpenApiConfig {
                 .servers(List.of(
                         new Server().url("https://9079.pro604cr.amypo.ai")
                 ));
+                
         }
 }
