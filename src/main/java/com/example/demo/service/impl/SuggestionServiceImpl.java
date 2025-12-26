@@ -8,7 +8,7 @@ import com.example.demo.service.CatalogService;
 import com.example.demo.service.FarmService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.demo.service.SuggestionService;
 import java.util.List;
 import java.util.stream.Collectors;
 
