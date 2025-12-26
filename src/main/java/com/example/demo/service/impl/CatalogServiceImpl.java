@@ -8,7 +8,7 @@ import com.example.demo.repository.FertilizerRepository;
 import com.example.demo.util.ValidationUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.demo.service.CatalogService;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
