@@ -1,10 +1,3 @@
-package com.example.demo.entity;
-
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "suggestions")
 @Data
@@ -21,16 +14,13 @@ public class Suggestion {
     @JoinColumn(name = "farm_id")
     private Farm farm;
 
-    @Column(length = 1000)
     private String suggestedCrops;
-
-    @Column(length = 1000)
     private String suggestedFertilizers;
-
     private LocalDateTime createdAt;
 
+    
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
 }
