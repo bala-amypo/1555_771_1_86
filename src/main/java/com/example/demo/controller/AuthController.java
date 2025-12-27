@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
-import com.example.demo.dto.RegisterRequest;
+import com.example.demo.dto.*;
 import com.example.demo.entity.User;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +18,21 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
+    // ✅ CONSTRUCTOR USED BY SPRING
     public AuthController(UserService userService,
                           JwtTokenProvider jwtTokenProvider,
                           PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    // ✅ CONSTRUCTOR USED BY TESTS
+    public AuthController(UserService userService,
+                          JwtTokenProvider jwtTokenProvider) {
+        this.userService = userService;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @PostMapping("/register")
@@ -34,9 +42,7 @@ public class AuthController {
                 .email(req.getEmail())
                 .password(req.getPassword())
                 .build();
-
-        User saved = userService.register(user);
-        return ResponseEntity.ok(saved);
+        return ResponseEntity.ok(userService.register(user));
     }
 
     @PostMapping("/login")
@@ -45,11 +51,17 @@ public class AuthController {
         User user = userService.findByEmail(req.getEmail());
 
         if (user == null || !passwordEncoder.matches(req.getPassword(), user.getPassword())) {
-            throw new BadRequestException("Invalid credentials");
+            return ResponseEntity.status(401).build();
         }
 
-        String token = jwtTokenProvider.createToken(user.getId(), user.getEmail(), user.getRole());
+        String token = jwtTokenProvider.createToken(
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
 
-        return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getEmail(), user.getRole()));
+        return ResponseEntity.ok(
+                new AuthResponse(token, user.getId(), user.getEmail(), user.getRole())
+        );
     }
 }
