@@ -24,18 +24,42 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // @Bean
+    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+    //     http.csrf().disable()
+    //         .authorizeHttpRequests(auth -> auth
+    //             .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+    //             .anyRequest().authenticated()
+    //         )
+    //         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+    //                 UsernamePasswordAuthenticationFilter.class)
+    //         .sessionManagement(session -> session.disable());
+
+    //     return http.build();
+    // }
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
-                    UsernamePasswordAuthenticationFilter.class)
-            .sessionManagement(session -> session.disable());
+    http.csrf().disable()
+        .authorizeHttpRequests(auth -> auth
+            // ✅ ADD THESE
+            .requestMatchers(
+                "/", 
+                "/error",
+                "/auth/**",
+                "/swagger-ui/**",
+                "/v3/api-docs/**"
+            ).permitAll()
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(
+            new JwtAuthenticationFilter(jwtTokenProvider),
+            UsernamePasswordAuthenticationFilter.class
+        )
+        .sessionManagement(session -> session.disable());
 
-        return http.build();
-    }
+    return http.build();
+}
+
 }
