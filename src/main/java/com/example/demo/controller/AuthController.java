@@ -23,6 +23,12 @@ private UserService userService;
     public AuthController() {
         // no-op
     }
+    // Constructor used by tests
+public AuthController(UserService userService, JwtTokenProvider jwtTokenProvider) {
+    this.userService = userService;
+    this.jwtTokenProvider = jwtTokenProvider;
+    this.passwordEncoder = new BCryptPasswordEncoder(); // default encoder
+}
 
     // ✅ USED by Spring during real runtime
     @Autowired
