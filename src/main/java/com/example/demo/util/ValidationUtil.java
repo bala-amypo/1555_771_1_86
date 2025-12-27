@@ -1,10 +1,21 @@
 package com.example.demo.util;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-@Component
 public class ValidationUtil {
+
+    private static final List<String> VALID_SEASONS =
+            List.of("Kharif", "Rabi", "Zaid");
+
     public static boolean validSeason(String season) {
-        return season != null && (season.equals("Kharif") || season.equals("Rabi") || season.equals("Summer"));
+        return VALID_SEASONS.contains(season);
+    }
+
+    public static boolean validNpk(String npk) {
+        return npk != null && npk.matches("\\d+-\\d+-\\d+");
+    }
+
+    public static boolean validPhRange(double min, double max) {
+        return min > 0 && max > 0 && min <= max;
     }
 }

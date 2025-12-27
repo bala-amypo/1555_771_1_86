@@ -1,14 +1,14 @@
-package com.example.demo.security;
+// package com.example.demo.security;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+// import lombok.AllArgsConstructor;
+// import lombok.Data;
+// import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserPrincipal {
-    private Long userId;
-    private String email;
-    private String role;
-}
+// @Data
+// @AllArgsConstructor
+// @NoArgsConstructor
+// public class UserPrincipal {
+//     private Long userId;
+//     private String email;
+//     private String role;
+// }
