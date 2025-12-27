@@ -1,45 +1,51 @@
-// package com.example.demo.security;
+package com.example.demo.security;
 
-// import org.springframework.security.authentication.*;
-// import org.springframework.security.core.authority.SimpleGrantedAuthority;
-// import org.springframework.security.core.context.SecurityContextHolder;
-// import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-// import org.springframework.web.filter.OncePerRequestFilter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-// import jakarta.servlet.FilterChain;
-// import jakarta.servlet.ServletException;
-// import jakarta.servlet.http.HttpServletRequest;
-// import jakarta.servlet.http.HttpServletResponse;
-// import java.io.IOException;
-// import java.util.Collections;
+import java.io.IOException;
+import java.util.List;
 
-// public class JwtAuthenticationFilter extends OncePerRequestFilter {
-//     private final JwtTokenProvider jwtTokenProvider;
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-//     public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
-//         this.jwtTokenProvider = jwtTokenProvider;
-//     }
+    private final JwtTokenProvider jwtTokenProvider;
 
-//     @Override
-//     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//         String token = extractToken(request);
-//         if (token != null && jwtTokenProvider.validateToken(token)) {
-//             String email = jwtTokenProvider.getEmail(token);
-//             Long userId = jwtTokenProvider.getUserId(token);
-//             String role = jwtTokenProvider.getRole(token);
-//             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-//                     email, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
-//             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//             SecurityContextHolder.getContext().setAuthentication(authentication);
-//         }
-//         filterChain.doFilter(request, response);
-//     }
+    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
-//     private String extractToken(HttpServletRequest request) {
-//         String bearer = request.getHeader("Authorization");
-//         if (bearer != null && bearer.startsWith("Bearer ")) {
-//             return bearer.substring(7);
-//         }
-//         return null;
-//     }
-// }
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String header = request.getHeader("Authorization");
+
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            if (jwtTokenProvider.validateToken(token)) {
+
+                Long userId = jwtTokenProvider.getUserId(token);
+                String role = jwtTokenProvider.getRole(token);
+
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(
+                                userId,
+                                null,
+                                List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                        );
+
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
+}
