@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class DemoApplication {
 
+private static ConfigurableApplicationContext context;
 	public static void main(String[] args) {
 
 		if (context != null && context.isRunning()) {
