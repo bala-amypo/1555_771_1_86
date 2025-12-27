@@ -16,12 +16,8 @@ public class Crop {
     private Long id;
 
     private String name;
-
-    private Double suitablePHMin;
-
-    private Double suitablePHMax;
-
-    private Double requiredWater;
-
+    private double suitablePHMin;
+    private double suitablePHMax;
+    private double requiredWater;
     private String season;
 }

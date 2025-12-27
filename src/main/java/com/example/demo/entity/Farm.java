@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,14 +16,10 @@ public class Farm {
     private Long id;
 
     private String name;
-
-    private Double soilPH;
-
-    private Double waterLevel;
-
+    private double soilPH;
+    private double waterLevel;
     private String season;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
     private User owner;
 }
