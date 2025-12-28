@@ -30,7 +30,7 @@ public class Farm {
 // private User owner;
 
 @ManyToOne(fetch = FetchType.EAGER)
-@JoinColumn(name = "owner_id", nullable = false)
+@JoinColumn(name = "user_id", nullable = false)
 @JsonIgnoreProperties({"password"})
 private User owner;
 
