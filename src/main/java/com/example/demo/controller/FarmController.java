@@ -49,7 +49,9 @@ public class FarmController {
 public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
                                        Authentication auth) {
 
-    Long userId = (Long) auth.getDetails(); // 🔥 FIX
+    String email = auth.getName(); // ✅ principal = email
+
+    Long userId = userService.getByEmail(email).getId(); // ✅ resolve ID
 
     Farm farm = Farm.builder()
             .name(req.getName())
@@ -63,8 +65,12 @@ public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
 
 @GetMapping
 public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
-    Long userId = (Long) auth.getDetails();
+
+    String email = auth.getName();
+    Long userId = userService.getByEmail(email).getId();
+
     return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
 }
+
 
 }
