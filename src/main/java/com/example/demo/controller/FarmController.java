@@ -51,7 +51,7 @@ public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
 
     String email = auth.getName(); // ✅ principal = email
 
-    Long userId = userService.getByEmail(email).getId(); // ✅ resolve ID
+    Long userId = userService.findByEmail(email).getId(); // ✅ resolve ID
 
     Farm farm = Farm.builder()
             .name(req.getName())
@@ -67,7 +67,7 @@ public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
 public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
 
     String email = auth.getName();
-    Long userId = userService.getByEmail(email).getId();
+    Long userId = userService.findByEmail(email).getId();
 
     return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
 }
