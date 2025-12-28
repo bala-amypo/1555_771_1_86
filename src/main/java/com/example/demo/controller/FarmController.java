@@ -22,25 +22,49 @@ public class FarmController {
         this.userService = userService;
     }
 
+    // @PostMapping
+    // public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
+    //                                        Authentication auth) {
+
+    //     Long userId = (Long) auth.getPrincipal();
+
+    //     Farm farm = Farm.builder()
+    //             .name(req.getName())
+    //             .soilPH(req.getSoilPH())
+    //             .waterLevel(req.getWaterLevel())
+    //             .season(req.getSeason())
+    //             .build();
+
+    //     return ResponseEntity.ok(farmService.createFarm(farm, userId));
+    // }
+
+    // @GetMapping
+    // public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
+    //     Long userId = (Long) auth.getPrincipal();
+    //     return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
+    // }
+
+
     @PostMapping
-    public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
-                                           Authentication auth) {
+public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
+                                       Authentication auth) {
 
-        Long userId = (Long) auth.getPrincipal();
+    Long userId = (Long) auth.getDetails(); // 🔥 FIX
 
-        Farm farm = Farm.builder()
-                .name(req.getName())
-                .soilPH(req.getSoilPH())
-                .waterLevel(req.getWaterLevel())
-                .season(req.getSeason())
-                .build();
+    Farm farm = Farm.builder()
+            .name(req.getName())
+            .soilPH(req.getSoilPH())
+            .waterLevel(req.getWaterLevel())
+            .season(req.getSeason())
+            .build();
 
-        return ResponseEntity.ok(farmService.createFarm(farm, userId));
-    }
+    return ResponseEntity.ok(farmService.createFarm(farm, userId));
+}
 
-    @GetMapping
-    public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
-        return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
-    }
+@GetMapping
+public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
+    Long userId = (Long) auth.getDetails();
+    return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
+}
+
 }
