@@ -13,7 +13,7 @@ public class JwtTokenProvider {
     private final Key key;
     private final long validityInMs;
 
-    // ✅ TEST CONSTRUCTOR
+   
     public JwtTokenProvider() {
         this.key = Keys.hmacShaKeyFor(
                 "this-is-a-very-secure-secret-key-123456".getBytes()
@@ -21,7 +21,7 @@ public class JwtTokenProvider {
         this.validityInMs = 3600000; // 1 hour
     }
 
-    // ✅ SPRING CONSTRUCTOR (optional)
+    
     public JwtTokenProvider(String secret, long validityInMs) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.validityInMs = validityInMs;
