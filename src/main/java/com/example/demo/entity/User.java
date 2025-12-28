@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@JsonIgnoreProperties({"password"})
+
 @Entity
 @Table(name = "users")
 @Data

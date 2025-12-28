@@ -20,6 +20,11 @@ public class Farm {
     private double waterLevel;
     private String season;
 
-    @ManyToOne
-    private User owner;
+    // @ManyToOne
+    // private User owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "owner_id", nullable = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+private User owner;
+
 }
