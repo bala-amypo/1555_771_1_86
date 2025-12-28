@@ -45,13 +45,37 @@ public class FarmController {
     // }
 
 
-    @PostMapping
+//     @PostMapping
+// public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
+//                                        Authentication auth) {
+
+//     String email = auth.getName(); // ✅ principal = email
+
+//     Long userId = userService.findByEmail(email).getId(); // ✅ resolve ID
+
+//     Farm farm = Farm.builder()
+//             .name(req.getName())
+//             .soilPH(req.getSoilPH())
+//             .waterLevel(req.getWaterLevel())
+//             .season(req.getSeason())
+//             .build();
+
+//     return ResponseEntity.ok(farmService.createFarm(farm, userId));
+// }
+
+// @GetMapping
+// public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
+
+//     String email = auth.getName();
+//     Long userId = userService.findByEmail(email).getId();
+
+//     return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
+// }
+@PostMapping
 public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
                                        Authentication auth) {
 
-    String email = auth.getName(); // ✅ principal = email
-
-    Long userId = userService.findByEmail(email).getId(); // ✅ resolve ID
+    Long userId = (Long) auth.getPrincipal();   // ✅ CORRECT
 
     Farm farm = Farm.builder()
             .name(req.getName())
@@ -65,12 +89,10 @@ public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
 
 @GetMapping
 public ResponseEntity<List<Farm>> listFarms(Authentication auth) {
-
-    String email = auth.getName();
-    Long userId = userService.findByEmail(email).getId();
-
+    Long userId = (Long) auth.getPrincipal();   // ✅ CORRECT
     return ResponseEntity.ok(farmService.getFarmsByOwner(userId));
 }
+
 
 
 }
