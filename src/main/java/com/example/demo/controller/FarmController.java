@@ -82,7 +82,7 @@ public ResponseEntity<Farm> createFarm(@RequestBody FarmRequest req,
             .soilPH(req.getSoilPH())
             .waterLevel(req.getWaterLevel())
             .season(req.getSeason())
-            .owner(userId)
+            .owner(userService.findById(userId))
             .build();
 
     return ResponseEntity.ok(farmService.createFarm(farm, userId));
