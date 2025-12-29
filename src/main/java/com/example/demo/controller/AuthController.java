@@ -19,7 +19,7 @@ private UserService userService;
     private JwtTokenProvider jwtTokenProvider;
     private PasswordEncoder passwordEncoder;
 
-    // ✅ REQUIRED by t01_springContextLoads
+    
     public AuthController() {
         // no-op
     }
@@ -27,10 +27,10 @@ private UserService userService;
 public AuthController(UserService userService, JwtTokenProvider jwtTokenProvider) {
     this.userService = userService;
     this.jwtTokenProvider = jwtTokenProvider;
-    this.passwordEncoder = new BCryptPasswordEncoder(); // default encoder
+    this.passwordEncoder = new BCryptPasswordEncoder(); 
 }
 
-    // ✅ USED by Spring during real runtime
+    
     @Autowired
     public AuthController(UserService userService,
                           JwtTokenProvider jwtTokenProvider,

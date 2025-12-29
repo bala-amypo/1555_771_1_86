@@ -27,7 +27,7 @@ public class SwaggerConfig {
                 ));
     }
 
-    // For the test code
+    
     public OpenAPI api() {
         return customOpenAPI();
     }
